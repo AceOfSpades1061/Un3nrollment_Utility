@@ -11,18 +11,6 @@ confirm() {
   done
 }
 
-get_cb_info() {
-  CB_INFO="$(crossystem --all 2>/dev/null)"
-
-  # Parse useful fields
-  CB_BOARD="$(echo "$CB_INFO" | grep -E '^platform=' | cut -d= -f2)"
-  CB_HWID="$(echo "$CB_INFO" | grep -E '^hwid=' | cut -d= -f2)"
-  CB_FWID="$(echo "$CB_INFO" | grep -E '^fwid=' | cut -d= -f2)"
-  CB_DEV="$(echo "$CB_INFO" | grep -E '^devsw_boot=' | cut -d= -f2)"
-  CB_WP="$(echo "$CB_INFO" | grep -E '^wpsw_cur=' | cut -d= -f2)"
-  CB_FWTYPE="$(echo "$CB_INFO" | grep -E '^mainfw_type=' | cut -d= -f2)"
-}
-
 while true; do
   clear
 
@@ -39,7 +27,6 @@ while true; do
 EOF
 
   echo
-  echo "CB Info: "
   echo "[1] Disable State Determination/Enrollment"
   echo "[2] Change GBB Flags to 0x80b1 [WP MUST BE DISABLED]"
   echo
@@ -54,11 +41,13 @@ EOF
       if confirm; then
         echo "Disabling State Determination..."
         sleep 1
-        echo --enterprise-enable-state-determination=never >/tmp/chrome_dev.conf
-        mount --bind /tmp/chrome_dev.conf /etc/chrome_dev.conf
-        initctl restart ui
-        echo "State Determination has been disabled! Now you can setup your chromebook as if it was never enrolled. :]"
-        sleep 5
+        echo "you ran the test version so this doesn't do anything, check the source code to see what this would actually do"
+        # echo --enterprise-enable-state-determination=never >/tmp/chrome_dev.conf
+        # mount --bind /tmp/chrome_dev.conf /etc/chrome_dev.conf
+        # initctl restart ui
+        # echo "State Determination has been disabled! Now you can setup your chromebook as if it was never enrolled. :]"
+        # sleep 5
+        sleep 3
       else
         echo "Cancelled."
         sleep 1
@@ -71,10 +60,11 @@ EOF
       sleep 1
       if confirm; then
         echo "you ran the test version so this doesn't do anything, check the source code to see what this would actually do"
-        echo "Changing GBB Flags to 0x80b1"
-        futility gbb -s --flash --flags=0x80b1
-        echo "GBB Flags have been changed to 0x80b1! Just to make sure it worked, go into Recovery, press tab, and look on the line gbb.flags"
-        sleep 5
+        # echo "Changing GBB Flags to 0x80b1"
+        # futility gbb -s --flash --flags=0x80b1
+        # echo "GBB Flags have been changed to 0x80b1! Just to make sure it worked, go into Recovery, press tab, and look on the line gbb.flags"
+        # sleep 5s
+        sleep 1
       else
         echo "Cancelled."
         sleep 1
@@ -85,11 +75,18 @@ EOF
       exit 0
       ;;
     p|P)
-      echo "Don't panic if your CB seems frozen!"
-      sudo shutdown
+      echo "Powering off..."
+      echo "test version so imagine it did power off..."
+      # sudo shutdown
+      sleep 1
+      exit 0
+      ;;
     r|R)
-      echo "Don't panic if your CB seems frozen!"
-      sudo reboot
+      echo "test version so just what if it did actually reboot?"
+      # sudo reboot
+      sleep 1
+      exit 0
+      ;;
     *)
       echo "Invalid option"
       sleep 1
