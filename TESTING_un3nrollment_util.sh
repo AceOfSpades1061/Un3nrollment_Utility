@@ -23,7 +23,7 @@ while true; do
                                                               |_____|                  |___/ 
    /\_/\
   ( 0.0 )
-   > ^ <  << Helper!
+   > ^ <  << helper!!
 EOF
 
   echo

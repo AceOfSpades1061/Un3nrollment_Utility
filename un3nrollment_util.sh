@@ -25,7 +25,7 @@ get_cb_info() {
 
 while true; do
   clear
-
+  get_cb_info
   cat <<'EOF'
  _   _       _____                 _ _                      _      _   _ _   _ _ _ _         
 | | | |_ __ |___ / _ __  _ __ ___ | | |_ __ ___   ___ _ __ | |_   | | | | |_(_) (_) |_ _   _ 
@@ -35,11 +35,17 @@ while true; do
                                                               |_____|                  |___/ 
    /\_/\
   ( 0.0 )
-   > ^ <  << Helper!
+   > ^ <  << helper!!
 EOF
 
   echo
-  echo "CB Info: "
+  echo "Your Chromebook:"
+  echo $CB_BOARD
+  echo $CB_HWID
+  echo $CB_FWID
+  echo $CB_WP
+  echo $CB_FWTYPE
+  echo
   echo "[1] Disable State Determination/Enrollment"
   echo "[2] Change GBB Flags to 0x80b1 [WP MUST BE DISABLED]"
   echo
@@ -87,9 +93,11 @@ EOF
     p|P)
       echo "Don't panic if your CB seems frozen!"
       sudo shutdown
+      ;;
     r|R)
       echo "Don't panic if your CB seems frozen!"
       sudo reboot
+      ;;
     *)
       echo "Invalid option"
       sleep 1
