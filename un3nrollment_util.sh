@@ -56,16 +56,15 @@ EOF
 
   case "$choice" in
     1)
-      echo "You have selected Disable State Determination. Proceed?"
+      echo "You have selected Disable State Determination, Proceed?"
       echo "WARNING: I have not implemented the commands for version milestones lower than R136, so this will only work if your version is above R136!"
       if confirm; then
-        echo "Disabling State Determination..."
+        echo "TIP: The Terminal will restart once this completes, so don't think something went wrong when the Terminal restarts."
         sleep 1
+        echo "Disabling State Determination..."
         echo --enterprise-enable-state-determination=never >/tmp/chrome_dev.conf
         mount --bind /tmp/chrome_dev.conf /etc/chrome_dev.conf
         initctl restart ui
-        echo "State Determination has been disabled! Now you can setup your chromebook as if it was never enrolled. :]"
-        sleep 5
       else
         echo "Cancelled."
         sleep 1
@@ -77,7 +76,6 @@ EOF
       echo "Are you sure you want to proceed?"
       sleep 1
       if confirm; then
-        echo "you ran the test version so this doesn't do anything, check the source code to see what this would actually do"
         echo "Changing GBB Flags to 0x80b1"
         futility gbb -s --flash --flags=0x80b1
         echo "GBB Flags have been changed to 0x80b1! Just to make sure it worked, go into Recovery, press tab, and look on the line gbb.flags"
