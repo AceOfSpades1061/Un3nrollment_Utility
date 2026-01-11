@@ -1,2 +1,2 @@
 # Un3nrollment_Utility
-wowow cool little 1337 speech haha [placeholder]
+don't expect a good readme yet im still working on the script [placeholder]
