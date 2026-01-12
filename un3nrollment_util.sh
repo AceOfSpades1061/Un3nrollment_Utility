@@ -11,18 +11,6 @@ confirm() {
   done
 }
 
-get_cb_info() {
-  CB_INFO="$(sudo crossystem --all 2>/dev/null)"
-
-  # Parse useful fields
-  CB_BOARD="$(echo "$CB_INFO" | grep -E '^platform=' | cut -d= -f2)"
-  CB_HWID="$(echo "$CB_INFO" | grep -E '^hwid=' | cut -d= -f2)"
-  CB_FWID="$(echo "$CB_INFO" | grep -E '^fwid=' | cut -d= -f2)"
-  CB_DEV="$(echo "$CB_INFO" | grep -E '^devsw_boot=' | cut -d= -f2)"
-  CB_WP="$(echo "$CB_INFO" | grep -E '^wpsw_cur=' | cut -d= -f2)"
-  CB_FWTYPE="$(echo "$CB_INFO" | grep -E '^mainfw_type=' | cut -d= -f2)"
-}
-
 while true; do
   clear
   get_cb_info
